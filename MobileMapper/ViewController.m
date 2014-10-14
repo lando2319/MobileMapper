@@ -41,7 +41,19 @@
     }];
 }
 
+- (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control {
+    CLLocationCoordinate2D center = view.annotation.coordinate;
 
+    MKCoordinateSpan span;
+    span.latitudeDelta = 0.01;
+    span.longitudeDelta = 0.01;
+
+    MKCoordinateRegion region;
+    region.center = center;
+    region.span = span;
+
+    [self.mapView setRegion:region animated:YES];
+}
 
 
 
