@@ -9,7 +9,7 @@
 #import "ViewController.h"
 #import <MapKit/MapKit.h>
 
-@interface ViewController ()
+@interface ViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
 @property MKPointAnnotation *mobileMakersAnnotation;
 
@@ -29,9 +29,13 @@
     [self.mapView addAnnotation:self.mobileMakersAnnotation];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    MKPinAnnotationView *pin = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"MyPinID"];
+    pin.canShowCallout = YES;
+    pin.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+    pin.image = [UIImage imageNamed:@"PinImage"];
+    return pin;
+
+    };
 
 @end
